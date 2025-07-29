@@ -1,3 +1,6 @@
+### 本仓库忠于使用最新版的Kernel，获取版本可前往Actions中下载，a15-6.12暂不支持
+## 非官方仓库，请注意分辨
+
 ### 这是一个自动构建GKI内核的仓库
 
 > 非GKI可以尝试[SukiSU云盘](https://alist.shirkneko.top)的资源，不支持一加ColorOS14、15
