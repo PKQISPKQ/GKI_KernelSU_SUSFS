@@ -169,10 +169,9 @@ jobs:
 
       - name: 初始化和同步内核源代码
         run: |
-         mkdir -p "$CONFIG" && cd "$CONFIG" && mkdir -p common && cd common
+         mkdir -p "$CONFIG" && cd "$CONFIG"
          git clone --depth=1 -b 16 https://github.com/PKQISPKQ/kernel_common-6.1.git
          echo "KERNEL_BRANCH=16" >> $GITHUB_ENV
-         cd ..
 
       - name: 确定 KernelSU 的分支
         run: |
