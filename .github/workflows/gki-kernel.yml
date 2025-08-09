@@ -565,7 +565,8 @@ jobs:
             cd "$CONFIG/bazel-bin/common/kernel_aarch64/"
             cp Image /home/runner/
             cd ../../..
-          fi            
+          fi
+
       - name: 修补 Image 文件 安卓12和安卓13(仅限sukisu)
         if: ${{ inputs.use_kpm && inputs.kernelsu_variant == 'SukiSU' && (inputs.android_version == 'android12' || inputs.android_version == 'android13') }}
         run: |
