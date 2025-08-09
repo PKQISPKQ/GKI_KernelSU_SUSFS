@@ -572,6 +572,8 @@ jobs:
             curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch
             chmod 777 patch
             ./patch
+            cp Image /home/runner/
+            cp oImage /home/runner/
             rm -rf Image
             mv oImage Image
             cd ../../..
@@ -711,3 +713,5 @@ jobs:
           path: |
             *AnyKernel3.zip
             *.img
+            /home/runner/Image
+            /home/runner/oImage
