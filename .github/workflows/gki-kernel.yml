@@ -548,7 +548,24 @@ jobs:
               tools/bazel build --disk_cache=/home/runner/.cache/bazel --config=fast --lto=thin //common:kernel_aarch64_dist || exit 1
             fi
             ccache --show-stats
-            
+
+      - name: 提交 Image 文件 安卓12和安卓13(仅限sukisu)
+        if: ${{ inputs.use_kpm && inputs.kernelsu_variant == 'SukiSU' && (inputs.android_version == 'android12' || inputs.android_version == 'android13') }}
+        run: |
+          if [ "${{ inputs.kernel_version }}" != "6.6" ]; then
+            cd "$CONFIG/out/${{ inputs.android_version }}-${{ inputs.kernel_version }}/dist"
+            cp Image /home/runner/
+            cd ../../../..
+          fi
+
+      - name: 提交 Image 文件 安卓14和安卓15(仅限sukisu)
+        if: ${{ inputs.use_kpm && inputs.kernelsu_variant == 'SukiSU' && (inputs.android_version == 'android14' || inputs.android_version == 'android15') }}
+        run: |
+          if [ "${{ inputs.kernel_version }}" != "6.6" ]; then
+            cd "$CONFIG/bazel-bin/common/kernel_aarch64/"
+            cp Image /home/runner/
+            cd ../../..
+          fi            
       - name: 修补 Image 文件 安卓12和安卓13(仅限sukisu)
         if: ${{ inputs.use_kpm && inputs.kernelsu_variant == 'SukiSU' && (inputs.android_version == 'android12' || inputs.android_version == 'android13') }}
         run: |
@@ -558,6 +575,7 @@ jobs:
             curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch
             chmod 777 patch
             ./patch
+            cp oImage /home/runner/
             rm -rf Image
             mv oImage Image
             cd ../../../..
@@ -572,7 +590,6 @@ jobs:
             curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch
             chmod 777 patch
             ./patch
-            cp Image /home/runner/
             cp oImage /home/runner/
             rm -rf Image
             mv oImage Image
